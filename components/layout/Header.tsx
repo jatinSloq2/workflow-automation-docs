@@ -31,10 +31,10 @@ export function Header() {
               <Workflow className="h-6 w-6 text-white" />
             </div>
             <div className="hidden sm:block">
-              <span className="font-black text-lg bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
+              <span className="font-black text-lg bg-gradient-to-r from-purple-400 to-blue-400 dark:bg-gradient-to-r dark:from-purple-400 dark:to-blue-400 light:bg-gradient-to-r light:from-purple-600 light:to-blue-600 bg-clip-text text-transparent">
                 AI Automations
               </span>
-              <div className="text-[10px] text-gray-500 -mt-1">No-Code Workflows</div>
+              <div className="text-[10px] text-gray-500 dark:text-gray-500 light:text-gray-600 -mt-1">No-Code Workflows</div>
             </div>
           </Link>
 

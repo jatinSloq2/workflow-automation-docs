@@ -29,7 +29,7 @@ export default function Home() {
   if (!mounted) return null;
 
   return (
-    <div className="min-h-screen bg-black text-white overflow-x-hidden mt-8">
+    <div className="min-h-screen bg-white dark:bg-black text-gray-900 dark:text-white overflow-x-hidden mt-8 transition-colors duration-200">
       {/* Animated Background */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none">
         <div className="absolute inset-0 bg-gradient-to-br from-purple-900/20 via-black to-blue-900/20" />

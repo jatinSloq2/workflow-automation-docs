@@ -3,13 +3,14 @@
 import { ChevronDown, Code, Github, Menu, Sparkles, Workflow, X, Zap } from 'lucide-react';
 import Link from 'next/link';
 import { useState } from 'react';
+import { ThemeToggle } from '@/components/ThemeToggle';
 
 export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [productsOpen, setProductsOpen] = useState(false);
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-black/80 backdrop-blur-xl border-b border-white/10">
+    <header className="fixed top-0 left-0 right-0 z-50 bg-black/80 dark:bg-black/80 light:bg-white/80 backdrop-blur-xl border-b border-white/10 dark:border-white/10 light:border-gray-200 transition-colors duration-200">
       {/* Top Banner */}
       <div className="bg-gradient-to-r from-purple-600 to-blue-600 text-white text-center py-2 px-4 text-sm">
         <div className="flex items-center justify-center gap-2">
@@ -30,10 +31,10 @@ export function Header() {
               <Workflow className="h-6 w-6 text-white" />
             </div>
             <div className="hidden sm:block">
-              <span className="font-black text-lg bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
+              <span className="font-black text-lg bg-gradient-to-r from-purple-400 to-blue-400 dark:bg-gradient-to-r dark:from-purple-400 dark:to-blue-400 light:bg-gradient-to-r light:from-purple-600 light:to-blue-600 bg-clip-text text-transparent">
                 AI Automations
               </span>
-              <div className="text-[10px] text-gray-500 -mt-1">No-Code Workflows</div>
+              <div className="text-[10px] text-gray-500 dark:text-gray-500 light:text-gray-600 -mt-1">No-Code Workflows</div>
             </div>
           </Link>
 
@@ -43,17 +44,17 @@ export function Header() {
             <div className="relative">
               <button
                 onMouseEnter={() => setProductsOpen(true)}
-                className="flex items-center gap-1 px-4 py-2 text-gray-300 hover:text-white transition-colors rounded-lg hover:bg-white/5"
+                className="flex items-center gap-1 px-4 py-2 text-gray-300 dark:text-gray-300 light:text-gray-700 hover:text-white dark:hover:text-white light:hover:text-gray-900 transition-colors rounded-lg hover:bg-white/5 dark:hover:bg-white/5 light:hover:bg-gray-100"
               >
                 Product
                 <ChevronDown className="h-4 w-4" />
               </button>
-              
+
               {productsOpen && (
                 <div
                   onMouseEnter={() => setProductsOpen(true)}
                   onMouseLeave={() => setProductsOpen(false)}
-                  className="absolute top-full left-0 mt-2 w-64 bg-gray-900 border border-white/10 rounded-xl shadow-2xl overflow-hidden"
+                  className="absolute top-full left-0 mt-2 w-64 bg-gray-900 dark:bg-gray-900 light:bg-white border border-white/10 dark:border-white/10 light:border-gray-200 rounded-xl shadow-2xl overflow-hidden"
                 >
                   <div className="p-2">
                     <Link href="/features" className="flex items-start gap-3 p-3 rounded-lg hover:bg-white/5 transition-colors group">
@@ -82,27 +83,27 @@ export function Header() {
               )}
             </div>
 
-            <Link 
-              href="/docs" 
-              className="px-4 py-2 text-gray-300 hover:text-white transition-colors rounded-lg hover:bg-white/5"
+            <Link
+              href="/docs"
+              className="px-4 py-2 text-gray-300 dark:text-gray-300 light:text-gray-700 hover:text-white dark:hover:text-white light:hover:text-gray-900 transition-colors rounded-lg hover:bg-white/5 dark:hover:bg-white/5 light:hover:bg-gray-100"
             >
               Documentation
             </Link>
-            <Link 
-              href="/blog" 
-              className="px-4 py-2 text-gray-300 hover:text-white transition-colors rounded-lg hover:bg-white/5"
+            <Link
+              href="/blog"
+              className="px-4 py-2 text-gray-300 dark:text-gray-300 light:text-gray-700 hover:text-white dark:hover:text-white light:hover:text-gray-900 transition-colors rounded-lg hover:bg-white/5 dark:hover:bg-white/5 light:hover:bg-gray-100"
             >
               Blog
             </Link>
-            <Link 
-              href="/examples" 
-              className="px-4 py-2 text-gray-300 hover:text-white transition-colors rounded-lg hover:bg-white/5"
+            <Link
+              href="/examples"
+              className="px-4 py-2 text-gray-300 dark:text-gray-300 light:text-gray-700 hover:text-white dark:hover:text-white light:hover:text-gray-900 transition-colors rounded-lg hover:bg-white/5 dark:hover:bg-white/5 light:hover:bg-gray-100"
             >
               Examples
             </Link>
-            <Link 
-              href="/community" 
-              className="px-4 py-2 text-gray-300 hover:text-white transition-colors rounded-lg hover:bg-white/5"
+            <Link
+              href="/community"
+              className="px-4 py-2 text-gray-300 dark:text-gray-300 light:text-gray-700 hover:text-white dark:hover:text-white light:hover:text-gray-900 transition-colors rounded-lg hover:bg-white/5 dark:hover:bg-white/5 light:hover:bg-gray-100"
             >
               Community
             </Link>
@@ -111,21 +112,24 @@ export function Header() {
           {/* Right Side Actions */}
           <div className="flex items-center gap-3">
             {/* GitHub Star */}
-            <a 
-              href="https://github.com/your-repo" 
-              target="_blank" 
+            <a
+              href="https://github.com/your-repo"
+              target="_blank"
               rel="noopener noreferrer"
-              className="hidden md:flex items-center gap-2 px-3 py-1.5 bg-white/5 border border-white/10 rounded-lg hover:bg-white/10 transition-all text-sm"
+              className="hidden md:flex items-center gap-2 px-3 py-1.5 bg-white/5 dark:bg-white/5 light:bg-gray-100 border border-white/10 dark:border-white/10 light:border-gray-200 rounded-lg hover:bg-white/10 dark:hover:bg-white/10 light:hover:bg-gray-200 transition-all text-sm"
             >
               <Github className="h-4 w-4" />
-              <span className="text-gray-300">Star</span>
-              <span className="px-2 py-0.5 bg-white/10 rounded-full text-xs">2.5k</span>
+              <span className="text-gray-300 dark:text-gray-300 light:text-gray-700">Star</span>
+              <span className="px-2 py-0.5 bg-white/10 dark:bg-white/10 light:bg-gray-200 rounded-full text-xs">2.5k</span>
             </a>
+
+            {/* Theme Toggle */}
+            <ThemeToggle />
 
             {/* Sign In */}
             <Link
               href="/login"
-              className="hidden sm:block px-4 py-2 text-gray-300 hover:text-white transition-colors"
+              className="hidden sm:block px-4 py-2 text-gray-300 dark:text-gray-300 light:text-gray-700 hover:text-white dark:hover:text-white light:hover:text-gray-900 transition-colors"
             >
               Sign In
             </Link>
@@ -142,7 +146,7 @@ export function Header() {
             {/* Mobile Menu Button */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="lg:hidden p-2 text-gray-300 hover:text-white transition-colors"
+              className="lg:hidden p-2 text-gray-300 dark:text-gray-300 light:text-gray-700 hover:text-white dark:hover:text-white light:hover:text-gray-900 transition-colors"
             >
               {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
             </button>

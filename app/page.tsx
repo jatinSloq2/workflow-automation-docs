@@ -1,11 +1,17 @@
 "use client"
 
-import { ArrowRight, Brain, Check, ChevronRight, Lock, Play, Sparkles, Star, Workflow, Zap } from 'lucide-react';
+import { ArrowRight, Brain, Check, ChevronRight, Lock, Play, Sparkles, Star, Workflow, Zap, Code2, Database } from 'lucide-react';
+import Link from 'next/link';
 import { useEffect, useState } from 'react';
 
 export default function Home() {
   const [activeFeature, setActiveFeature] = useState(0);
   const [scrollY, setScrollY] = useState(0);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => setScrollY(window.scrollY);
@@ -20,21 +26,23 @@ export default function Home() {
     return () => clearInterval(interval);
   }, []);
 
+  if (!mounted) return null;
+
   return (
-    <div className="min-h-screen bg-black text-white overflow-x-hidden mt-8">
+    <div className="min-h-screen bg-white dark:bg-black text-gray-900 dark:text-white overflow-x-hidden mt-8 transition-colors duration-200">
       {/* Animated Background */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute inset-0 bg-gradient-to-br from-purple-900/20 via-black to-blue-900/20" />
-        <div className="absolute top-0 left-1/4 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl animate-pulse" />
-        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl animate-pulse delay-1000" />
+        <div className="absolute inset-0 bg-gradient-to-br dark:from-purple-900/20 dark:via-black dark:to-blue-900/20 light:from-purple-100/40 light:via-white light:to-blue-100/40" />
+        <div className="absolute top-0 left-1/4 w-96 h-96 bg-purple-500/10 dark:bg-purple-500/10 light:bg-purple-300/20 rounded-full blur-3xl animate-pulse" />
+        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-blue-500/10 dark:bg-blue-500/10 light:bg-blue-300/20 rounded-full blur-3xl animate-pulse delay-1000" />
       </div>
 
       {/* Hero Section */}
       <section className="relative min-h-screen flex items-center justify-center px-4 py-20">
         <div className="max-w-7xl mx-auto text-center z-10">
-          <div className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-purple-500/20 to-blue-500/20 border border-purple-500/30 rounded-full mb-8 backdrop-blur-sm animate-fade-in">
-            <Sparkles className="h-5 w-5 text-purple-400 animate-pulse" />
-            <span className="text-sm font-medium bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
+          <div className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r dark:from-purple-500/20 dark:to-blue-500/20 light:from-purple-300/30 light:to-blue-300/30 border dark:border-purple-500/30 light:border-purple-400/40 rounded-full mb-8 backdrop-blur-sm animate-fade-in">
+            <Sparkles className="h-5 w-5 dark:text-purple-400 light:text-purple-600 animate-pulse" />
+            <span className="text-sm font-medium bg-gradient-to-r dark:from-purple-400 dark:to-blue-400 light:from-purple-600 light:to-blue-600 bg-clip-text text-transparent">
               The Future of Workflow Automation
             </span>
           </div>
@@ -53,17 +61,17 @@ export default function Home() {
           </p>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16">
-            <button className="group relative px-8 py-4 bg-gradient-to-r from-purple-600 to-blue-600 rounded-xl font-bold text-lg transition-all hover:scale-105 hover:shadow-2xl hover:shadow-purple-500/50">
+            <Link href="/docs/getting-started" className="group relative px-8 py-4 bg-gradient-to-r from-purple-600 to-blue-600 rounded-xl font-bold text-lg transition-all hover:scale-105 hover:shadow-2xl hover:shadow-purple-500/50">
               <span className="relative z-10 flex items-center gap-2">
                 Start Building Free
                 <ArrowRight className="h-5 w-5 group-hover:translate-x-1 transition-transform" />
               </span>
               <div className="absolute inset-0 bg-gradient-to-r from-purple-500 to-blue-500 rounded-xl blur opacity-50 group-hover:opacity-75 transition-opacity" />
-            </button>
-            <button className="flex items-center gap-2 px-8 py-4 bg-white/5 border border-white/10 rounded-xl font-semibold text-lg hover:bg-white/10 transition-all backdrop-blur-sm">
+            </Link>
+            <a href="#features" className="flex items-center gap-2 px-8 py-4 bg-white/5 border border-white/10 rounded-xl font-semibold text-lg hover:bg-white/10 transition-all backdrop-blur-sm">
               <Play className="h-5 w-5" />
-              Watch Demo
-            </button>
+              Learn More
+            </a>
           </div>
 
           {/* Stats */}
@@ -128,7 +136,7 @@ export default function Home() {
       </section>
 
       {/* Node Categories - Expanded */}
-      <section className="relative py-32 px-4 bg-gradient-to-b from-black via-purple-950/10 to-black">
+      <section id="features" className="relative py-32 px-4 bg-gradient-to-b from-black via-purple-950/10 to-black">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-20">
             <h2 className="text-5xl md:text-6xl font-black mb-6">
@@ -282,13 +290,13 @@ export default function Home() {
               </p>
               
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <button className="px-8 py-4 bg-white text-purple-600 rounded-xl font-bold text-lg hover:bg-gray-100 transition-all hover:scale-105 flex items-center justify-center gap-2">
+                <Link href="/docs/getting-started" className="px-8 py-4 bg-white text-purple-600 rounded-xl font-bold text-lg hover:bg-gray-100 transition-all hover:scale-105 flex items-center justify-center gap-2">
                   Start Building Now
                   <ArrowRight className="h-5 w-5" />
-                </button>
-                <button className="px-8 py-4 bg-white/10 border-2 border-white/30 text-white rounded-xl font-bold text-lg hover:bg-white/20 transition-all backdrop-blur-sm">
+                </Link>
+                <Link href="/docs" className="px-8 py-4 bg-white/10 border-2 border-white/30 text-white rounded-xl font-bold text-lg hover:bg-white/20 transition-all backdrop-blur-sm">
                   View Documentation
-                </button>
+                </Link>
               </div>
 
               <div className="flex items-center justify-center gap-6 mt-10 text-sm text-white/80">

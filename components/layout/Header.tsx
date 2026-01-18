@@ -83,27 +83,27 @@ export function Header() {
               )}
             </div>
 
-            <Link 
-              href="/docs" 
-              className="px-4 py-2 text-gray-300 hover:text-white transition-colors rounded-lg hover:bg-white/5"
+            <Link
+              href="/docs"
+              className="px-4 py-2 text-gray-300 dark:text-gray-300 light:text-gray-700 hover:text-white dark:hover:text-white light:hover:text-gray-900 transition-colors rounded-lg hover:bg-white/5 dark:hover:bg-white/5 light:hover:bg-gray-100"
             >
               Documentation
             </Link>
-            <Link 
-              href="/blog" 
-              className="px-4 py-2 text-gray-300 hover:text-white transition-colors rounded-lg hover:bg-white/5"
+            <Link
+              href="/blog"
+              className="px-4 py-2 text-gray-300 dark:text-gray-300 light:text-gray-700 hover:text-white dark:hover:text-white light:hover:text-gray-900 transition-colors rounded-lg hover:bg-white/5 dark:hover:bg-white/5 light:hover:bg-gray-100"
             >
               Blog
             </Link>
-            <Link 
-              href="/examples" 
-              className="px-4 py-2 text-gray-300 hover:text-white transition-colors rounded-lg hover:bg-white/5"
+            <Link
+              href="/examples"
+              className="px-4 py-2 text-gray-300 dark:text-gray-300 light:text-gray-700 hover:text-white dark:hover:text-white light:hover:text-gray-900 transition-colors rounded-lg hover:bg-white/5 dark:hover:bg-white/5 light:hover:bg-gray-100"
             >
               Examples
             </Link>
-            <Link 
-              href="/community" 
-              className="px-4 py-2 text-gray-300 hover:text-white transition-colors rounded-lg hover:bg-white/5"
+            <Link
+              href="/community"
+              className="px-4 py-2 text-gray-300 dark:text-gray-300 light:text-gray-700 hover:text-white dark:hover:text-white light:hover:text-gray-900 transition-colors rounded-lg hover:bg-white/5 dark:hover:bg-white/5 light:hover:bg-gray-100"
             >
               Community
             </Link>

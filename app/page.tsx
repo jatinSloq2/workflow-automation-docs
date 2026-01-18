@@ -290,13 +290,13 @@ export default function Home() {
               </p>
               
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <button className="px-8 py-4 bg-white text-purple-600 rounded-xl font-bold text-lg hover:bg-gray-100 transition-all hover:scale-105 flex items-center justify-center gap-2">
+                <Link href="/docs/getting-started" className="px-8 py-4 bg-white text-purple-600 rounded-xl font-bold text-lg hover:bg-gray-100 transition-all hover:scale-105 flex items-center justify-center gap-2">
                   Start Building Now
                   <ArrowRight className="h-5 w-5" />
-                </button>
-                <button className="px-8 py-4 bg-white/10 border-2 border-white/30 text-white rounded-xl font-bold text-lg hover:bg-white/20 transition-all backdrop-blur-sm">
+                </Link>
+                <Link href="/docs" className="px-8 py-4 bg-white/10 border-2 border-white/30 text-white rounded-xl font-bold text-lg hover:bg-white/20 transition-all backdrop-blur-sm">
                   View Documentation
-                </button>
+                </Link>
               </div>
 
               <div className="flex items-center justify-center gap-6 mt-10 text-sm text-white/80">

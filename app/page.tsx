@@ -1,11 +1,17 @@
 "use client"
 
-import { ArrowRight, Brain, Check, ChevronRight, Lock, Play, Sparkles, Star, Workflow, Zap } from 'lucide-react';
+import { ArrowRight, Brain, Check, ChevronRight, Lock, Play, Sparkles, Star, Workflow, Zap, Code2, Database } from 'lucide-react';
+import Link from 'next/link';
 import { useEffect, useState } from 'react';
 
 export default function Home() {
   const [activeFeature, setActiveFeature] = useState(0);
   const [scrollY, setScrollY] = useState(0);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => setScrollY(window.scrollY);
@@ -19,6 +25,8 @@ export default function Home() {
     }, 3000);
     return () => clearInterval(interval);
   }, []);
+
+  if (!mounted) return null;
 
   return (
     <div className="min-h-screen bg-black text-white overflow-x-hidden mt-8">

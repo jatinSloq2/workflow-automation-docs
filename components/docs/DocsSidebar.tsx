@@ -1,14 +1,13 @@
-'use client';
+"use client"
 
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-import { ChevronRight, ChevronDown, Home, Sparkles, Zap, Code, BookOpen, Wrench, AlertCircle } from 'lucide-react';
-import { useState } from 'react';
+import { AlertCircle, ArrowRight, BookOpen, ChevronDown, ChevronRight, Code, Github, Home, MessageCircle, Sparkles, Wrench, Zap } from 'lucide-react';
+import { useEffect, useState } from 'react';
 
 const navigation = [
   {
     title: 'Getting Started',
     icon: Sparkles,
+    gradient: 'from-purple-500 to-pink-500',
     links: [
       { title: 'Introduction', href: '/docs' },
       { title: 'Installation', href: '/docs/getting-started/installation' },
@@ -19,6 +18,7 @@ const navigation = [
   {
     title: 'Core Concepts',
     icon: Zap,
+    gradient: 'from-blue-500 to-cyan-500',
     links: [
       { title: 'Workflows', href: '/docs/core-concepts/workflows' },
       { title: 'Nodes', href: '/docs/core-concepts/nodes' },
@@ -30,6 +30,7 @@ const navigation = [
   {
     title: 'Nodes',
     icon: Code,
+    gradient: 'from-green-500 to-emerald-500',
     links: [
       { title: 'Overview', href: '/docs/nodes' },
       { title: 'Triggers', href: '/docs/nodes/triggers' },
@@ -44,6 +45,7 @@ const navigation = [
   {
     title: 'Expressions',
     icon: BookOpen,
+    gradient: 'from-orange-500 to-red-500',
     links: [
       { title: 'Basics', href: '/docs/expressions/basics' },
       { title: 'Node References', href: '/docs/expressions/node-references' },
@@ -55,6 +57,7 @@ const navigation = [
   {
     title: 'Guides',
     icon: Wrench,
+    gradient: 'from-pink-500 to-purple-500',
     links: [
       { title: 'Building Workflows', href: '/docs/guides/building-workflows' },
       { title: 'File Processing', href: '/docs/guides/file-processing' },
@@ -65,28 +68,9 @@ const navigation = [
     ],
   },
   {
-    title: 'Examples',
-    icon: Sparkles,
-    links: [
-      { title: 'Email Campaign', href: '/docs/examples/email-campaign' },
-      { title: 'Data Processing', href: '/docs/examples/data-processing' },
-      { title: 'AI Content Generation', href: '/docs/examples/ai-content-generation' },
-      { title: 'Webhook Handler', href: '/docs/examples/webhook-handler' },
-    ],
-  },
-  {
-    title: 'API Reference',
-    icon: Code,
-    links: [
-      { title: 'Overview', href: '/docs/api-reference' },
-      { title: 'Workflows', href: '/docs/api-reference/workflows' },
-      { title: 'Executions', href: '/docs/api-reference/executions' },
-      { title: 'Webhooks', href: '/docs/api-reference/webhooks' },
-    ],
-  },
-  {
     title: 'Troubleshooting',
     icon: AlertCircle,
+    gradient: 'from-yellow-500 to-orange-500',
     links: [
       { title: 'Common Errors', href: '/docs/troubleshooting/common-errors' },
       { title: 'Debugging', href: '/docs/troubleshooting/debugging' },
@@ -95,12 +79,15 @@ const navigation = [
 ];
 
 export function DocsSidebar() {
-  const pathname = usePathname();
-  const [openSections, setOpenSections] = useState<Set<string>>(
-    new Set(navigation.map(section => section.title))
-  );
+  const [pathname, setPathname] = useState('/docs');
+  const [openSections, setOpenSections] = useState(new Set(navigation.map(section => section.title)));
+  const [mounted, setMounted] = useState(false);
 
-  const toggleSection = (title: string) => {
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  const toggleSection = (title) => {
     const newOpenSections = new Set(openSections);
     if (newOpenSections.has(title)) {
       newOpenSections.delete(title);
@@ -113,52 +100,73 @@ export function DocsSidebar() {
   return (
     <nav className="space-y-2">
       {/* Back to Home */}
-      <Link 
-        href="/" 
-        className="flex items-center gap-2 px-3 py-2 mb-6 text-sm font-medium text-gray-400 hover:text-purple-400 transition-colors group"
+      <a
+        href="/"
+        className={`flex items-center gap-2 px-4 py-3 mb-6 rounded-xl bg-gradient-to-r from-purple-100 to-blue-100 dark:from-purple-500/10 dark:to-blue-500/10 border border-purple-300 dark:border-purple-500/20 text-sm font-semibold text-purple-700 dark:text-purple-400 hover:text-purple-800 dark:hover:text-purple-300 hover:bg-purple-200 dark:hover:bg-purple-500/20 transition-all group ${mounted ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-4'}`}
       >
         <Home className="h-4 w-4 group-hover:-translate-x-1 transition-transform" />
         Back to Home
-      </Link>
+      </a>
 
-      {navigation.map((section) => {
+      {navigation.map((section, i) => {
         const isOpen = openSections.has(section.title);
         const SectionIcon = section.icon;
-        
+
         return (
-          <div key={section.title} className="mb-1">
+          <div
+            key={section.title}
+            className={`mb-2 transition-all duration-500 ${mounted ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-4'}`}
+            style={{ transitionDelay: `${i * 50}ms` }}
+          >
             <button
               onClick={() => toggleSection(section.title)}
-              className="flex items-center justify-between w-full px-3 py-2 text-sm font-semibold text-white hover:bg-white/5 rounded-lg transition-all group"
+              className="group flex items-center justify-between w-full px-4 py-3 text-sm font-bold text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-white/5 rounded-xl transition-all relative overflow-hidden"
             >
-              <div className="flex items-center gap-2">
-                <SectionIcon className="h-4 w-4 text-purple-400" />
-                {section.title}
+              <div className={`absolute inset-0 bg-gradient-to-r ${section.gradient} opacity-0 group-hover:opacity-10 transition-opacity`} />
+              <div className="relative flex items-center gap-3">
+                <div className={`p-1.5 rounded-lg bg-gradient-to-br ${section.gradient}`}>
+                  <SectionIcon className="h-3.5 w-3.5 text-white" />
+                </div>
+                <span>{section.title}</span>
               </div>
-              {isOpen ? (
-                <ChevronDown className="h-4 w-4 text-gray-500 group-hover:text-purple-400 transition-colors" />
-              ) : (
-                <ChevronRight className="h-4 w-4 text-gray-500 group-hover:text-purple-400 transition-colors" />
-              )}
+              <div className="relative">
+                {isOpen ? (
+                  <ChevronDown className="h-4 w-4 text-gray-500 dark:text-gray-500 group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-all" />
+                ) : (
+                  <ChevronRight className="h-4 w-4 text-gray-500 dark:text-gray-500 group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-all" />
+                )}
+              </div>
             </button>
-            
+
             {isOpen && (
-              <ul className="mt-1 space-y-0.5 ml-2 border-l-2 border-purple-500/20 pl-4">
-                {section.links.map((link) => {
+              <ul className="mt-2 space-y-0.5 ml-2 border-l-2 border-purple-300 dark:border-purple-500/20 pl-4">
+                {section.links.map((link, j) => {
                   const isActive = pathname === link.href;
-                  
+
                   return (
-                    <li key={link.href}>
-                      <Link
+                    <li
+                      key={link.href}
+                      className={`transition-all duration-300`}
+                      style={{ transitionDelay: `${j * 30}ms` }}
+                    >
+                      <a
                         href={link.href}
-                        className={`block py-2 px-3 text-sm rounded-lg transition-all ${
-                          isActive
-                            ? 'text-purple-400 bg-purple-500/10 font-medium border-l-2 border-purple-400 -ml-[2px]'
-                            : 'text-gray-400 hover:text-white hover:bg-white/5'
-                        }`}
+                        onClick={(e) => {
+                          e.preventDefault();
+                          setPathname(link.href);
+                        }}
+                        className={`group block py-2.5 px-3 text-sm rounded-lg transition-all ${isActive
+                          ? 'text-purple-700 dark:text-purple-400 bg-purple-100 dark:bg-purple-500/10 font-semibold border-l-2 border-purple-600 dark:border-purple-400 -ml-[2px] shadow-lg shadow-purple-200/50 dark:shadow-purple-500/10'
+                          : 'text-gray-700 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-white/5 hover:translate-x-1'
+                          }`}
                       >
-                        {link.title}
-                      </Link>
+                        <span className="flex items-center justify-between">
+                          {link.title}
+                          {isActive && (
+                            <div className="h-1.5 w-1.5 bg-purple-600 dark:bg-purple-400 rounded-full animate-pulse" />
+                          )}
+                        </span>
+                      </a>
                     </li>
                   );
                 })}
@@ -169,33 +177,42 @@ export function DocsSidebar() {
       })}
 
       {/* Quick Links Section */}
-      <div className="mt-8 pt-8 border-t border-white/10">
-        <div className="px-3 mb-3 text-xs font-semibold text-gray-500 uppercase tracking-wider">
-          Quick Links
+      <div className="mt-8 pt-8 border-t border-gray-300 dark:border-white/10">
+        <div className="px-4 mb-4 flex items-center gap-2">
+          <div className="h-1 w-1 bg-purple-600 dark:bg-purple-500 rounded-full" />
+          <span className="text-xs font-bold text-gray-600 dark:text-gray-500 uppercase tracking-wider">
+            Quick Links
+          </span>
         </div>
-        <div className="space-y-1">
+        <div className="space-y-2">
           <a
             href="https://github.com"
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-2 px-3 py-2 text-sm text-gray-400 hover:text-white hover:bg-white/5 rounded-lg transition-all"
+            className="group flex items-center gap-3 px-4 py-2.5 text-sm text-gray-700 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-white/5 rounded-xl transition-all hover:translate-x-1"
           >
-            <svg className="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-            </svg>
-            GitHub
+            <Github className="h-4 w-4 group-hover:rotate-12 transition-transform" />
+            <span>GitHub</span>
+            <ArrowRight className="h-3 w-3 ml-auto opacity-0 group-hover:opacity-100 transition-opacity" />
           </a>
           <a
             href="https://discord.com"
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-2 px-3 py-2 text-sm text-gray-400 hover:text-white hover:bg-white/5 rounded-lg transition-all"
+            className="group flex items-center gap-3 px-4 py-2.5 text-sm text-gray-700 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-white/5 rounded-xl transition-all hover:translate-x-1"
           >
-            <svg className="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515a.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0a12.64 12.64 0 0 0-.617-1.25a.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057a19.9 19.9 0 0 0 5.993 3.03a.078.078 0 0 0 .084-.028a14.09 14.09 0 0 0 1.226-1.994a.076.076 0 0 0-.041-.106a13.107 13.107 0 0 1-1.872-.892a.077.077 0 0 1-.008-.128a10.2 10.2 0 0 0 .372-.292a.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127a12.299 12.299 0 0 1-1.873.892a.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028a19.839 19.839 0 0 0 6.002-3.03a.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419c0-1.333.956-2.419 2.157-2.419c1.21 0 2.176 1.096 2.157 2.42c0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419c0-1.333.955-2.419 2.157-2.419c1.21 0 2.176 1.096 2.157 2.42c0 1.333-.946 2.418-2.157 2.418z"/>
-            </svg>
-            Discord
+            <MessageCircle className="h-4 w-4 group-hover:scale-110 transition-transform" />
+            <span>Discord</span>
+            <ArrowRight className="h-3 w-3 ml-auto opacity-0 group-hover:opacity-100 transition-opacity" />
           </a>
+        </div>
+      </div>
+
+      {/* Version Badge */}
+      <div className="mt-6 px-4">
+        <div className="p-3 rounded-xl bg-gradient-to-r from-purple-100 to-blue-100 dark:from-purple-500/10 dark:to-blue-500/10 border border-purple-300 dark:border-purple-500/20 text-center">
+          <div className="text-xs text-gray-600 dark:text-gray-500 mb-1">Version</div>
+          <div className="text-sm font-bold text-purple-700 dark:text-purple-400">v2.0.0</div>
         </div>
       </div>
     </nav>

@@ -40,9 +40,9 @@ export default function Home() {
       {/* Hero Section */}
       <section className="relative min-h-screen flex items-center justify-center px-4 py-20">
         <div className="max-w-7xl mx-auto text-center z-10">
-          <div className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-purple-500/20 to-blue-500/20 border border-purple-500/30 rounded-full mb-8 backdrop-blur-sm animate-fade-in">
-            <Sparkles className="h-5 w-5 text-purple-400 animate-pulse" />
-            <span className="text-sm font-medium bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
+          <div className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r dark:from-purple-500/20 dark:to-blue-500/20 light:from-purple-300/30 light:to-blue-300/30 border dark:border-purple-500/30 light:border-purple-400/40 rounded-full mb-8 backdrop-blur-sm animate-fade-in">
+            <Sparkles className="h-5 w-5 dark:text-purple-400 light:text-purple-600 animate-pulse" />
+            <span className="text-sm font-medium bg-gradient-to-r dark:from-purple-400 dark:to-blue-400 light:from-purple-600 light:to-blue-600 bg-clip-text text-transparent">
               The Future of Workflow Automation
             </span>
           </div>

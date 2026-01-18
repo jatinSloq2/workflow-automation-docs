@@ -61,17 +61,17 @@ export default function Home() {
           </p>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16">
-            <button className="group relative px-8 py-4 bg-gradient-to-r from-purple-600 to-blue-600 rounded-xl font-bold text-lg transition-all hover:scale-105 hover:shadow-2xl hover:shadow-purple-500/50">
+            <Link href="/docs/getting-started" className="group relative px-8 py-4 bg-gradient-to-r from-purple-600 to-blue-600 rounded-xl font-bold text-lg transition-all hover:scale-105 hover:shadow-2xl hover:shadow-purple-500/50">
               <span className="relative z-10 flex items-center gap-2">
                 Start Building Free
                 <ArrowRight className="h-5 w-5 group-hover:translate-x-1 transition-transform" />
               </span>
               <div className="absolute inset-0 bg-gradient-to-r from-purple-500 to-blue-500 rounded-xl blur opacity-50 group-hover:opacity-75 transition-opacity" />
-            </button>
-            <button className="flex items-center gap-2 px-8 py-4 bg-white/5 border border-white/10 rounded-xl font-semibold text-lg hover:bg-white/10 transition-all backdrop-blur-sm">
+            </Link>
+            <a href="#features" className="flex items-center gap-2 px-8 py-4 bg-white/5 border border-white/10 rounded-xl font-semibold text-lg hover:bg-white/10 transition-all backdrop-blur-sm">
               <Play className="h-5 w-5" />
-              Watch Demo
-            </button>
+              Learn More
+            </a>
           </div>
 
           {/* Stats */}

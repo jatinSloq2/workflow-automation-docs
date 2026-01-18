@@ -1,270 +1,178 @@
-import { Badge } from '@/components/ui/badge';
-import { CodeBlock } from '@/components/ui/CodeBlock';
-import { Bell, MessageSquare, Users } from 'lucide-react';
+import Link from 'next/link';
+import { ArrowRight } from 'lucide-react';
 
-export default function SlackNode() {
+export default function CommunicationNodesPage() {
+  const nodes = [
+    {
+      title: 'Send Email',
+      description: 'Send automated emails via SMTP with HTML support',
+      icon: '📧',
+      href: '/docs/nodes/communication/email',
+      color: 'from-blue-500 to-cyan-500',
+    },
+    {
+      title: 'Slack',
+      description: 'Send messages directly to Slack channels or users',
+      icon: '💬',
+      href: '/docs/nodes/communication/slack',
+      color: 'from-purple-500 to-pink-500',
+    },
+  ];
 
   return (
-    <div className="min-h-screen bg-black text-white p-8">
-      <div className="max-w-4xl mx-auto space-y-12">
-        {/* Hero Section */}
-        <div className="relative">
-          <div className="absolute -inset-1 bg-gradient-to-r from-purple-600 to-pink-600 rounded-2xl opacity-20 blur-xl" />
-          <div className="relative bg-gradient-to-br from-white/5 to-white/0 border border-white/10 rounded-2xl p-8">
-            <div className="flex items-start gap-6">
-              <div className="text-6xl">💬</div>
-              <div className="flex-1">
-                <h1 className="text-5xl font-black mb-4 bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
-                  Slack
-                </h1>
-                <div className="flex flex-wrap gap-2 mb-4">
-                  <Badge>Communication</Badge>
-                  <Badge variant="outline">Webhooks</Badge>
-                  <Badge variant="outline">Bot Token</Badge>
-                </div>
-                <p className="text-xl text-gray-300 leading-relaxed">
-                  Send messages, notifications, and alerts to Slack channels via webhooks or bot tokens
-                </p>
-              </div>
-            </div>
-          </div>
+    <div className="min-h-screen bg-black text-white">
+      <div className="max-w-5xl mx-auto px-6 py-12">
+        {/* Breadcrumb */}
+        <div className="flex items-center gap-2 text-sm text-gray-400 mb-8">
+          <Link href="/docs" className="hover:text-white">Docs</Link>
+          <span>/</span>
+          <Link href="/docs/nodes" className="hover:text-white">Nodes</Link>
+          <span>/</span>
+          <span className="text-white">Communication</span>
         </div>
 
-        {/* Quick Stats */}
-        <div className="grid md:grid-cols-3 gap-4">
-          <div className="p-4 rounded-xl bg-gradient-to-br from-white/5 to-white/0 border border-white/10">
-            <MessageSquare className="h-8 w-8 text-purple-400 mb-2" />
-            <div className="text-2xl font-bold text-white">Real-time</div>
-            <div className="text-sm text-gray-400">Instant Delivery</div>
+        {/* Header */}
+        <div className="mb-12">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-500/10 border border-blue-500/20 mb-6">
+            <span className="text-sm text-blue-300">📨 Communication Nodes</span>
           </div>
-          <div className="p-4 rounded-xl bg-gradient-to-br from-white/5 to-white/0 border border-white/10">
-            <Users className="h-8 w-8 text-pink-400 mb-2" />
-            <div className="text-2xl font-bold text-white">Channels</div>
-            <div className="text-sm text-gray-400">Public & Private</div>
-          </div>
-          <div className="p-4 rounded-xl bg-gradient-to-br from-white/5 to-white/0 border border-white/10">
-            <Bell className="h-8 w-8 text-blue-400 mb-2" />
-            <div className="text-2xl font-bold text-white">Alerts</div>
-            <div className="text-sm text-gray-400">Notifications</div>
-          </div>
+          
+          <h1 className="text-5xl font-black mb-6 bg-gradient-to-r from-white to-blue-400 bg-clip-text text-transparent">
+            Communication Nodes
+          </h1>
+          
+          <p className="text-xl text-gray-400 max-w-3xl leading-relaxed">
+            Notify users and teams by sending messages through various communication channels 
+            including email, Slack, and more. Perfect for alerts, confirmations, and notifications.
+          </p>
         </div>
 
-        {/* Overview */}
-        <section>
-          <h2 className="text-3xl font-black mb-4">Overview</h2>
-          <p className="text-gray-300 leading-relaxed mb-4">
-            The Slack node enables you to send messages to Slack channels from your workflows. Perfect for team notifications, alerts, status updates, and automated reporting.
-          </p>
-          <p className="text-gray-300 leading-relaxed">
-            Supports both incoming webhooks (simpler setup) and bot tokens (more features like posting as a bot, reactions, etc.).
-          </p>
-        </section>
-
-        {/* Configuration */}
-        <section>
-          <h2 className="text-3xl font-black mb-6">Configuration</h2>
-          <div className="overflow-x-auto rounded-xl border border-white/10">
-            <table className="w-full text-left">
-              <thead className="bg-white/5 border-b border-white/10">
-                <tr>
-                  <th className="py-4 px-6 text-sm font-bold text-purple-400">Field</th>
-                  <th className="py-4 px-6 text-sm font-bold text-purple-400">Type</th>
-                  <th className="py-4 px-6 text-sm font-bold text-purple-400">Required</th>
-                  <th className="py-4 px-6 text-sm font-bold text-purple-400">Description</th>
-                </tr>
-              </thead>
-              <tbody>
-                {[
-                  { field: 'channel', type: 'String', req: '✅', desc: 'Channel name (e.g., #general, #alerts)' },
-                  { field: 'text', type: 'Text', req: '✅', desc: 'Message content (supports expressions)' },
-                  { field: 'authentication', type: 'Select', req: '✅', desc: 'webhook or token' },
-                  { field: 'webhookUrl', type: 'String', req: '⚠️', desc: 'Required for webhook auth' },
-                  { field: 'botToken', type: 'String', req: '⚠️', desc: 'Required for token auth' },
-                ].map((row, i) => (
-                  <tr key={i} className="border-b border-white/5 hover:bg-white/5 transition-colors">
-                    <td className="py-4 px-6">
-                      <code className="text-purple-400 bg-purple-500/10 px-2 py-1 rounded text-sm">{row.field}</code>
-                    </td>
-                    <td className="py-4 px-6 text-gray-300 text-sm">{row.type}</td>
-                    <td className="py-4 px-6 text-sm">{row.req}</td>
-                    <td className="py-4 px-6 text-gray-400 text-sm">{row.desc}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </section>
-
-        {/* Setup Guide */}
-        <section>
-          <h2 className="text-3xl font-black mb-6">Setup Guide</h2>
+        {/* Available Nodes */}
+        <section className="mb-16">
+          <h2 className="text-3xl font-black mb-6">Available Channels</h2>
           
           <div className="space-y-6">
-            <div className="p-6 rounded-xl bg-gradient-to-br from-white/5 to-white/0 border border-white/10">
-              <h3 className="text-xl font-bold mb-3 text-purple-400">Option 1: Incoming Webhook (Recommended for Simple Use)</h3>
-              <ol className="space-y-3 text-gray-300">
-                <li className="flex gap-3">
-                  <span className="text-purple-400 font-bold">1.</span>
-                  <span>Go to your Slack workspace settings</span>
-                </li>
-                <li className="flex gap-3">
-                  <span className="text-purple-400 font-bold">2.</span>
-                  <span>Navigate to "Apps" → "Manage" → "Custom Integrations"</span>
-                </li>
-                <li className="flex gap-3">
-                  <span className="text-purple-400 font-bold">3.</span>
-                  <span>Click "Incoming Webhooks" → "Add to Slack"</span>
-                </li>
-                <li className="flex gap-3">
-                  <span className="text-purple-400 font-bold">4.</span>
-                  <span>Choose a channel and copy the webhook URL</span>
-                </li>
-                <li className="flex gap-3">
-                  <span className="text-purple-400 font-bold">5.</span>
-                  <span>Paste the URL into the webhookUrl field</span>
-                </li>
-              </ol>
-            </div>
-
-            <div className="p-6 rounded-xl bg-gradient-to-br from-white/5 to-white/0 border border-white/10">
-              <h3 className="text-xl font-bold mb-3 text-pink-400">Option 2: Bot Token (Advanced Features)</h3>
-              <ol className="space-y-3 text-gray-300">
-                <li className="flex gap-3">
-                  <span className="text-pink-400 font-bold">1.</span>
-                  <span>Go to api.slack.com/apps</span>
-                </li>
-                <li className="flex gap-3">
-                  <span className="text-pink-400 font-bold">2.</span>
-                  <span>Create a new app or select existing</span>
-                </li>
-                <li className="flex gap-3">
-                  <span className="text-pink-400 font-bold">3.</span>
-                  <span>Go to "OAuth & Permissions"</span>
-                </li>
-                <li className="flex gap-3">
-                  <span className="text-pink-400 font-bold">4.</span>
-                  <span>Add "chat:write" scope</span>
-                </li>
-                <li className="flex gap-3">
-                  <span className="text-pink-400 font-bold">5.</span>
-                  <span>Install app to workspace and copy Bot User OAuth Token</span>
-                </li>
-              </ol>
-            </div>
+            {nodes.map((node) => (
+              <Link
+                key={node.href}
+                href={node.href}
+                className="group relative overflow-hidden rounded-2xl block"
+              >
+                <div className={`absolute inset-0 bg-gradient-to-r ${node.color} opacity-10 group-hover:opacity-20 transition-opacity`} />
+                <div className="relative p-8 rounded-2xl bg-gradient-to-br from-white/5 to-white/0 border border-white/10 group-hover:border-white/30 transition-all">
+                  <div className="flex items-start justify-between gap-8">
+                    <div className="flex-1">
+                      <div className="text-4xl mb-4">{node.icon}</div>
+                      <h3 className="text-2xl font-bold mb-3 group-hover:text-blue-400 transition-colors">
+                        {node.title}
+                      </h3>
+                      <p className="text-gray-400 text-base leading-relaxed mb-4">
+                        {node.description}
+                      </p>
+                      <div className="flex items-center gap-2 text-blue-400 font-semibold group-hover:gap-3 transition-all">
+                        <span>Learn more</span>
+                        <ArrowRight className="h-4 w-4" />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </Link>
+            ))}
           </div>
         </section>
 
-        {/* Output */}
-        <section>
-          <h2 className="text-3xl font-black mb-4">Output</h2>
-          <CodeBlock
-            language="json"
-            code={`{
-  "sent": true,
-  "channel": "#general",
-  "text": "Deployment successful! 🚀"
-}`}
-          />
-        </section>
-
-        {/* Examples */}
-        <section>
-          <h2 className="text-3xl font-black mb-6">Examples</h2>
-
-          <div className="space-y-8">
-            <div className="p-6 rounded-xl bg-gradient-to-br from-white/5 to-white/0 border border-white/10">
-              <h3 className="text-xl font-bold mb-3 text-purple-400">Example 1: Simple Notification</h3>
-              <CodeBlock
-                language="json"
-                code={`{
-  "channel": "#general",
-  "text": "New user signup: {{$prev.data.name}} ({{$prev.data.email}})",
-  "authentication": "webhook",
-  "webhookUrl": "https://hooks.slack.com/services/YOUR/WEBHOOK/URL"
-}`}
-              />
+        {/* Common Use Cases */}
+        <section className="mb-16">
+          <h2 className="text-3xl font-black mb-6">Common Use Cases</h2>
+          
+          <div className="grid md:grid-cols-3 gap-6">
+            <div className="p-6 rounded-xl bg-gradient-to-br from-blue-500/10 to-blue-500/5 border border-blue-500/20 hover:border-blue-500/50 transition-all">
+              <div className="text-3xl mb-3">🔔</div>
+              <h3 className="text-lg font-bold mb-3 text-blue-400">Notifications</h3>
+              <ul className="text-gray-400 text-sm space-y-2">
+                <li>• Order confirmations</li>
+                <li>• System alerts</li>
+                <li>• Status updates</li>
+                <li>• Reminder emails</li>
+              </ul>
             </div>
 
-            <div className="p-6 rounded-xl bg-gradient-to-br from-white/5 to-white/0 border border-white/10">
-              <h3 className="text-xl font-bold mb-3 text-pink-400">Example 2: Alert with Data</h3>
-              <CodeBlock
-                language="json"
-                code={`{
-  "channel": "#alerts",
-  "text": "🚨 *High CPU Usage Detected*\\n\\nServer: {{$node.monitor.data.server}}\\nCPU: {{$node.monitor.data.cpu}}%\\nTime: {{$now}}",
-  "authentication": "webhook",
-  "webhookUrl": "https://hooks.slack.com/services/YOUR/WEBHOOK/URL"
-}`}
-              />
+            <div className="p-6 rounded-xl bg-gradient-to-br from-purple-500/10 to-purple-500/5 border border-purple-500/20 hover:border-purple-500/50 transition-all">
+              <div className="text-3xl mb-3">👥</div>
+              <h3 className="text-lg font-bold mb-3 text-purple-400">Team Coordination</h3>
+              <ul className="text-gray-400 text-sm space-y-2">
+                <li>• Slack notifications</li>
+                <li>• Team alerts</li>
+                <li>• Progress reports</li>
+                <li>• Approval requests</li>
+              </ul>
             </div>
 
-            <div className="p-6 rounded-xl bg-gradient-to-br from-white/5 to-white/0 border border-white/10">
-              <h3 className="text-xl font-bold mb-3 text-blue-400">Example 3: Success Message</h3>
-              <CodeBlock
-                language="json"
-                code={`{
-  "channel": "#deployments",
-  "text": "✅ *Deployment Successful*\\n\\nEnvironment: Production\\nVersion: {{$node.build.data.version}}\\nCommit: {{$node.build.data.commit}}\\nDeployed by: {{$input.user}}",
-  "authentication": "token",
-  "botToken": "xoxb-your-bot-token"
-}`}
-              />
+            <div className="p-6 rounded-xl bg-gradient-to-br from-pink-500/10 to-pink-500/5 border border-pink-500/20 hover:border-pink-500/50 transition-all">
+              <div className="text-3xl mb-3">📋</div>
+              <h3 className="text-lg font-bold mb-3 text-pink-400">Business Process</h3>
+              <ul className="text-gray-400 text-sm space-y-2">
+                <li>• Invoice sending</li>
+                <li>• Report delivery</li>
+                <li>• Newsletter distribution</li>
+                <li>• Certificate delivery</li>
+              </ul>
             </div>
-          </div>
-        </section>
-
-        {/* Message Formatting */}
-        <section>
-          <h2 className="text-3xl font-black mb-6">Message Formatting</h2>
-          <div className="p-6 rounded-xl bg-gradient-to-br from-white/5 to-white/0 border border-white/10">
-            <p className="text-gray-300 mb-4">Slack supports mrkdwn formatting:</p>
-            <CodeBlock
-              language="text"
-              code={`*Bold text*
-_Italic text_
-~Strikethrough~
-\`Code\`
-\`\`\`Code block\`\`\`
-> Quote
-• Bullet point
-1. Numbered list
-<https://example.com|Link text>
-:emoji: Emojis`}
-            />
           </div>
         </section>
 
         {/* Best Practices */}
-        <section>
+        <section className="mb-16">
           <h2 className="text-3xl font-black mb-6">Best Practices</h2>
+          
           <div className="space-y-4">
             <div className="p-5 border-l-4 border-green-500 bg-green-500/10 rounded-r-xl">
-              <h4 className="font-bold mb-2 text-green-400">✅ DO: Use Webhooks for Simple Notifications</h4>
+              <h4 className="font-bold mb-2 text-green-400">✅ Personalize Messages</h4>
               <p className="text-sm text-gray-300">
-                Webhooks are easier to set up and perfect for one-way notifications.
+                Use expressions to include recipient names and relevant data in messages.
               </p>
             </div>
 
             <div className="p-5 border-l-4 border-green-500 bg-green-500/10 rounded-r-xl">
-              <h4 className="font-bold mb-2 text-green-400">✅ DO: Include Context in Messages</h4>
+              <h4 className="font-bold mb-2 text-green-400">✅ Template Email Content</h4>
               <p className="text-sm text-gray-300">
-                Add relevant data, timestamps, and links to help your team act quickly.
+                Create professional email templates with consistent branding and styling.
+              </p>
+            </div>
+
+            <div className="p-5 border-l-4 border-blue-500 bg-blue-500/10 rounded-r-xl">
+              <h4 className="font-bold mb-2 text-blue-400">ℹ️ Handle Delivery Failures</h4>
+              <p className="text-sm text-gray-300">
+                Add error handling to catch and log failed message deliveries.
               </p>
             </div>
 
             <div className="p-5 border-l-4 border-red-500 bg-red-500/10 rounded-r-xl">
-              <h4 className="font-bold mb-2 text-red-400">❌ DON'T: Spam Channels</h4>
+              <h4 className="font-bold mb-2 text-red-400">❌ Don't Spam Users</h4>
               <p className="text-sm text-gray-300">
-                Group related messages or use threading to avoid overwhelming channels.
+                Respect user preferences and add unsubscribe options to emails.
               </p>
             </div>
+          </div>
+        </section>
 
-            <div className="p-5 border-l-4 border-amber-500 bg-amber-500/10 rounded-r-xl">
-              <h4 className="font-bold mb-2 text-amber-400">⚠️ CONSIDER: Rate Limits</h4>
-              <p className="text-sm text-gray-300">
-                Slack has rate limits (1 message per second for webhooks). Add delays for bulk messages.
-              </p>
-            </div>
+        {/* Next Steps */}
+        <section className="p-8 rounded-2xl bg-gradient-to-r from-blue-500/10 to-cyan-500/10 border border-blue-500/20">
+          <h3 className="text-2xl font-bold mb-4">Get Started with Communication</h3>
+          <p className="text-gray-300 mb-6">
+            Choose a communication channel to learn how to send messages:
+          </p>
+          <div className="flex flex-wrap gap-3">
+            {nodes.map((node) => (
+              <Link 
+                key={node.href}
+                href={node.href} 
+                className="px-6 py-3 bg-blue-500 hover:bg-blue-600 rounded-lg font-semibold transition-all flex items-center gap-2"
+              >
+                <span>{node.icon}</span>
+                {node.title}
+              </Link>
+            ))}
           </div>
         </section>
       </div>

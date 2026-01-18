@@ -72,7 +72,7 @@ export default function DocsLayout({ children }: { children: React.ReactNode }) 
             </article>
 
             {/* Navigation Footer */}
-            <div className="mt-12 flex items-center justify-between p-6 rounded-xl bg-gradient-to-br from-white/5 to-white/0 border border-white/10">
+            {/* <div className="mt-12 flex items-center justify-between p-6 rounded-xl bg-gradient-to-br from-white/5 to-white/0 border border-white/10">
               <button className="flex items-center gap-2 text-sm text-gray-400 hover:text-purple-400 transition-colors">
                 <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
@@ -85,7 +85,7 @@ export default function DocsLayout({ children }: { children: React.ReactNode }) 
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                 </svg>
               </button>
-            </div>
+            </div> */}
           </main>
 
           {/* Table of Contents - Hidden on smaller screens */}

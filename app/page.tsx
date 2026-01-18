@@ -136,7 +136,7 @@ export default function Home() {
       </section>
 
       {/* Node Categories - Expanded */}
-      <section className="relative py-32 px-4 bg-gradient-to-b from-black via-purple-950/10 to-black">
+      <section id="features" className="relative py-32 px-4 bg-gradient-to-b from-black via-purple-950/10 to-black">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-20">
             <h2 className="text-5xl md:text-6xl font-black mb-6">

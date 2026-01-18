@@ -3,6 +3,7 @@
 import { ChevronDown, Code, Github, Menu, Sparkles, Workflow, X, Zap } from 'lucide-react';
 import Link from 'next/link';
 import { useState } from 'react';
+import { ThemeToggle } from '@/components/ThemeToggle';
 
 export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);

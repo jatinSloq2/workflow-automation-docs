@@ -1,112 +1,109 @@
-// src/app/docs/nodes/ai/ai-chat/page.tsx
-import { CodeBlock } from '@/components/ui/CodeBlock';
-import { Callout } from '@/components/ui/Callout';
 import { NodeCard } from '@/components/mdx/NodeCard';
 import { Badge } from '@/components/ui/badge';
+import { Callout } from '@/components/ui/Callout';
+import { CodeBlock } from '@/components/ui/CodeBlock';
+import { Brain, TrendingUp, Zap } from 'lucide-react';
+
 
 export default function AIChatNode() {
   return (
-    <div className="space-y-8">
-      <div>
-        <div className="flex items-center gap-3 mb-4">
-          <span className="text-5xl">🤖</span>
-          <div>
-            <h1 className="text-4xl font-bold">AI Chat</h1>
-            <div className="flex gap-2 mt-2">
-              <Badge>AI</Badge>
-              <Badge variant="outline">OpenAI</Badge>
-              <Badge variant="outline">Anthropic</Badge>
-              <Badge variant="outline">Ollama</Badge>
+    <div className="min-h-screen bg-black text-white p-8">
+      <div className="max-w-4xl mx-auto space-y-12">
+        {/* Hero Section */}
+        <div className="relative">
+          <div className="absolute -inset-1 bg-gradient-to-r from-purple-600 to-blue-600 rounded-2xl opacity-20 blur-xl" />
+          <div className="relative bg-gradient-to-br from-white/5 to-white/0 border border-white/10 rounded-2xl p-8">
+            <div className="flex items-start gap-6">
+              <div className="text-6xl">🤖</div>
+              <div className="flex-1">
+                <h1 className="text-5xl font-black mb-4 bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
+                  AI Chat Node
+                </h1>
+                <div className="flex flex-wrap gap-2 mb-4">
+                  <Badge>AI</Badge>
+                  <Badge variant="outline">OpenAI</Badge>
+                  <Badge variant="outline">Anthropic</Badge>
+                  <Badge variant="outline">Ollama</Badge>
+                </div>
+                <p className="text-xl text-gray-300 leading-relaxed">
+                  Interact with AI language models to generate text, analyze data, and automate content creation
+                </p>
+              </div>
             </div>
           </div>
         </div>
-        <p className="text-xl text-gray-600 dark:text-gray-300">
-          Interact with AI language models to generate text, analyze data, and automate content creation
-        </p>
-      </div>
 
-      <section id="overview">
-        <h2 className="text-3xl font-bold mb-4">Overview</h2>
-        <p>
-          The AI Chat node allows you to integrate powerful language models into your workflows.
-          It supports multiple providers including OpenAI (GPT-4, GPT-3.5), Anthropic (Claude),
-          local models via Ollama, and Groq.
-        </p>
-      </section>
-
-      <section id="configuration">
-        <h2 className="text-3xl font-bold mb-4">Configuration</h2>
-
-        <div className="space-y-6">
-          <div>
-            <h3 className="text-xl font-semibold mb-3">Provider Settings</h3>
-            <div className="overflow-x-auto">
-              <table className="w-full text-left border-collapse">
-                <thead>
-                  <tr className="border-b">
-                    <th className="py-2 px-4">Field</th>
-                    <th className="py-2 px-4">Type</th>
-                    <th className="py-2 px-4">Required</th>
-                    <th className="py-2 px-4">Description</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr className="border-b">
-                    <td className="py-2 px-4"><code>provider</code></td>
-                    <td className="py-2 px-4">Select</td>
-                    <td className="py-2 px-4">✅</td>
-                    <td className="py-2 px-4">AI provider (openai, anthropic, ollama, groq)</td>
-                  </tr>
-                  <tr className="border-b">
-                    <td className="py-2 px-4"><code>model</code></td>
-                    <td className="py-2 px-4">String</td>
-                    <td className="py-2 px-4">✅</td>
-                    <td className="py-2 px-4">Model name (e.g., gpt-4, claude-3-5-sonnet)</td>
-                  </tr>
-                  <tr className="border-b">
-                    <td className="py-2 px-4"><code>apiKey</code></td>
-                    <td className="py-2 px-4">String</td>
-                    <td className="py-2 px-4">⚠️</td>
-                    <td className="py-2 px-4">API key (not required for Ollama)</td>
-                  </tr>
-                  <tr className="border-b">
-                    <td className="py-2 px-4"><code>systemPrompt</code></td>
-                    <td className="py-2 px-4">Text</td>
-                    <td className="py-2 px-4">❌</td>
-                    <td className="py-2 px-4">System message to set behavior</td>
-                  </tr>
-                  <tr className="border-b">
-                    <td className="py-2 px-4"><code>prompt</code></td>
-                    <td className="py-2 px-4">Text</td>
-                    <td className="py-2 px-4">✅</td>
-                    <td className="py-2 px-4">User prompt (supports expressions)</td>
-                  </tr>
-                  <tr className="border-b">
-                    <td className="py-2 px-4"><code>temperature</code></td>
-                    <td className="py-2 px-4">Number</td>
-                    <td className="py-2 px-4">❌</td>
-                    <td className="py-2 px-4">Creativity (0-2, default: 0.7)</td>
-                  </tr>
-                  <tr className="border-b">
-                    <td className="py-2 px-4"><code>maxTokens</code></td>
-                    <td className="py-2 px-4">Number</td>
-                    <td className="py-2 px-4">❌</td>
-                    <td className="py-2 px-4">Maximum response length (default: 1000)</td>
-                  </tr>
-                </tbody>
-              </table>
+        {/* Quick Stats */}
+        <div className="grid md:grid-cols-3 gap-4">
+          {[
+            { icon: Brain, label: 'AI Providers', value: '4+' },
+            { icon: Zap, label: 'Response Time', value: '<2s' },
+            { icon: TrendingUp, label: 'Success Rate', value: '99.9%' },
+          ].map((stat, i) => (
+            <div key={i} className="p-4 rounded-xl bg-gradient-to-br from-white/5 to-white/0 border border-white/10">
+              <stat.icon className="h-8 w-8 text-purple-400 mb-2" />
+              <div className="text-2xl font-bold text-white">{stat.value}</div>
+              <div className="text-sm text-gray-400">{stat.label}</div>
             </div>
-          </div>
+          ))}
         </div>
-      </section>
 
-      <section id="output">
-        <h2 className="text-3xl font-bold mb-4">Output</h2>
-        <p className="mb-4">The AI Chat node returns the following data structure:</p>
+        {/* Overview */}
+        <section id="overview">
+          <h2 className="text-3xl font-black mb-4 text-white">Overview</h2>
+          <p className="text-gray-300 leading-relaxed">
+            The AI Chat node allows you to integrate powerful language models into your workflows.
+            It supports multiple providers including OpenAI (GPT-4, GPT-3.5), Anthropic (Claude),
+            local models via Ollama, and Groq.
+          </p>
+        </section>
 
-        <CodeBlock
-          language="json"
-          code={`{
+        {/* Configuration */}
+        <section id="configuration">
+          <h2 className="text-3xl font-black mb-6 text-white">Configuration</h2>
+
+          <div className="overflow-x-auto rounded-xl border border-white/10">
+            <table className="w-full text-left">
+              <thead className="bg-white/5 border-b border-white/10">
+                <tr>
+                  <th className="py-4 px-6 text-sm font-bold text-purple-400">Field</th>
+                  <th className="py-4 px-6 text-sm font-bold text-purple-400">Type</th>
+                  <th className="py-4 px-6 text-sm font-bold text-purple-400">Required</th>
+                  <th className="py-4 px-6 text-sm font-bold text-purple-400">Description</th>
+                </tr>
+              </thead>
+              <tbody>
+                {[
+                  { field: 'provider', type: 'Select', req: '✅', desc: 'AI provider (openai, anthropic, ollama, groq)' },
+                  { field: 'model', type: 'String', req: '✅', desc: 'Model name (e.g., gpt-4, claude-3-5-sonnet)' },
+                  { field: 'apiKey', type: 'String', req: '⚠️', desc: 'API key (not required for Ollama)' },
+                  { field: 'systemPrompt', type: 'Text', req: '❌', desc: 'System message to set behavior' },
+                  { field: 'prompt', type: 'Text', req: '✅', desc: 'User prompt (supports expressions)' },
+                  { field: 'temperature', type: 'Number', req: '❌', desc: 'Creativity (0-2, default: 0.7)' },
+                  { field: 'maxTokens', type: 'Number', req: '❌', desc: 'Maximum response length (default: 1000)' },
+                ].map((row, i) => (
+                  <tr key={i} className="border-b border-white/5 hover:bg-white/5 transition-colors">
+                    <td className="py-4 px-6">
+                      <code className="text-purple-400 bg-purple-500/10 px-2 py-1 rounded text-sm">{row.field}</code>
+                    </td>
+                    <td className="py-4 px-6 text-gray-300 text-sm">{row.type}</td>
+                    <td className="py-4 px-6 text-sm">{row.req}</td>
+                    <td className="py-4 px-6 text-gray-400 text-sm">{row.desc}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        {/* Output */}
+        <section id="output">
+          <h2 className="text-3xl font-black mb-4 text-white">Output</h2>
+          <p className="text-gray-300 mb-4">The AI Chat node returns the following data structure:</p>
+
+          <CodeBlock
+            language="json"
+            code={`{
   "data": {
     "response": "The AI-generated text response",
     "model": "gpt-4",
@@ -117,10 +114,9 @@ export default function AIChatNode() {
     }
   }
 }`}
-        />
+          />
 
-        <div className="mt-4 space-y-2">
-          <h3 className="font-semibold">Accessing Output in Other Nodes</h3>
+          <h3 className="text-xl font-bold mb-3 text-white mt-6">Accessing Output in Other Nodes</h3>
           <CodeBlock
             language="javascript"
             code={`// Get the AI response
@@ -132,25 +128,21 @@ export default function AIChatNode() {
 // Get token usage
 {{ $prev.data.usage.total_tokens }}`}
           />
-        </div>
-      </section>
+        </section>
 
-      <section id="examples">
-        <h2 className="text-3xl font-bold mb-4">Examples</h2>
+        {/* Examples */}
+        <section id="examples">
+          <h2 className="text-3xl font-black mb-6 text-white">Examples</h2>
 
-        <div className="space-y-8">
-          <div>
-            <h3 className="text-xl font-semibold mb-3">Example 1: Content Summarization</h3>
-            <p className="mb-4">
-              Use AI to summarize article content fetched from an API:
-            </p>
-
-            <div className="space-y-4">
-              <div className="p-4 bg-gray-50 dark:bg-gray-900 rounded-lg">
-                <p className="text-sm font-semibold mb-2">Configuration:</p>
-                <CodeBlock
-                  language="yaml"
-                  code={`Provider: openai
+          <div className="space-y-8">
+            <div className="p-6 rounded-xl bg-gradient-to-br from-white/5 to-white/0 border border-white/10">
+              <h3 className="text-xl font-bold mb-3 text-purple-400">Example 1: Content Summarization</h3>
+              <p className="text-gray-300 mb-4">
+                Use AI to summarize article content fetched from an API:
+              </p>
+              <CodeBlock
+                language="yaml"
+                code={`Provider: openai
 Model: gpt-4o-mini
 System Prompt: You are a helpful assistant that summarizes content.
 Prompt: Summarize this article in 3 bullet points:
@@ -159,23 +151,18 @@ Prompt: Summarize this article in 3 bullet points:
 
 Temperature: 0.5
 Max Tokens: 300`}
-                />
-              </div>
-
+              />
               <Callout type="tip">
                 Lower temperature (0.3-0.5) for factual tasks like summarization.
                 Higher temperature (0.7-1.0) for creative tasks.
               </Callout>
             </div>
-          </div>
 
-          <div>
-            <h3 className="text-xl font-semibold mb-3">Example 2: Data Analysis from CSV</h3>
-            <p className="mb-4">
-              Analyze uploaded CSV data and generate insights:
-            </p>
-
-            <div className="p-4 bg-gray-50 dark:bg-gray-900 rounded-lg">
+            <div className="p-6 rounded-xl bg-gradient-to-br from-white/5 to-white/0 border border-white/10">
+              <h3 className="text-xl font-bold mb-3 text-blue-400">Example 2: Data Analysis from CSV</h3>
+              <p className="text-gray-300 mb-4">
+                Analyze uploaded CSV data and generate insights:
+              </p>
               <CodeBlock
                 language="yaml"
                 code={`Provider: anthropic
@@ -192,171 +179,49 @@ Focus on:
               />
             </div>
           </div>
+        </section>
 
-          <div>
-            <h3 className="text-xl font-semibold mb-3">Example 3: Personalized Email Content</h3>
-            <p className="mb-4">
-              Generate personalized email content for each user:
-            </p>
+        {/* Best Practices */}
+        <section id="best-practices">
+          <h2 className="text-3xl font-black mb-6 text-white">Best Practices</h2>
 
-            <div className="p-4 bg-gray-50 dark:bg-gray-900 rounded-lg">
-              <CodeBlock
-                language="yaml"
-                code={`Provider: groq
-Model: llama-3.3-70b-versatile
-Prompt: Write a personalized welcome email for:
-Name: {{ $item.name }}
-Industry: {{ $item.industry }}
-Company: {{ $item.company }}
-
-Make it friendly and professional.`}
-              />
+          <div className="space-y-4">
+            <div className="p-5 border-l-4 border-green-500 bg-green-500/10 rounded-r-xl">
+              <h4 className="font-bold mb-2 text-green-400">✅ DO: Use Clear System Prompts</h4>
+              <p className="text-sm text-gray-300">
+                Define the AI's role and behavior in the system prompt for consistent results.
+              </p>
             </div>
 
-            <Callout type="info">
-              When processing arrays, AI Chat automatically processes each item and
-              returns an array of responses.
-            </Callout>
-          </div>
-        </div>
-      </section>
-
-      <section id="best-practices">
-        <h2 className="text-3xl font-bold mb-4">Best Practices</h2>
-
-        <div className="space-y-4">
-          <div className="p-4 border-l-4 border-blue-500 bg-blue-50 dark:bg-blue-950/20">
-            <h4 className="font-semibold mb-2">✅ DO: Use Clear System Prompts</h4>
-            <p className="text-sm">
-              Define the AI's role and behavior in the system prompt for consistent results.
-            </p>
-          </div>
-
-          <div className="p-4 border-l-4 border-blue-500 bg-blue-50 dark:bg-blue-950/20">
-            <h4 className="font-semibold mb-2">✅ DO: Include Context</h4>
-            <p className="text-sm">
-              Provide relevant context from previous nodes to get better responses.
-            </p>
-          </div>
-
-          <div className="p-4 border-l-4 border-red-500 bg-red-50 dark:bg-red-950/20">
-            <h4 className="font-semibold mb-2">❌ DON'T: Send Sensitive Data</h4>
-            <p className="text-sm">
-              Avoid sending passwords, API keys, or PII to external AI providers.
-              Use Ollama for local processing of sensitive data.
-            </p>
-          </div>
-
-          <div className="p-4 border-l-4 border-red-500 bg-red-50 dark:bg-red-950/20">
-            <h4 className="font-semibold mb-2">❌ DON'T: Over-rely on High Temperatures</h4>
-            <p className="text-sm">
-              High temperature can produce inconsistent results. Use 0.3-0.7 for most tasks.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      <section id="providers">
-        <h2 className="text-3xl font-bold mb-4">Provider Comparison</h2>
-
-        <div className="overflow-x-auto">
-          <table className="w-full border-collapse">
-            <thead>
-              <tr className="border-b bg-gray-50 dark:bg-gray-900">
-                <th className="py-3 px-4 text-left">Provider</th>
-                <th className="py-3 px-4 text-left">Models</th>
-                <th className="py-3 px-4 text-left">Best For</th>
-                <th className="py-3 px-4 text-left">Cost</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr className="border-b">
-                <td className="py-3 px-4 font-semibold">OpenAI</td>
-                <td className="py-3 px-4"><code>gpt-4</code>, <code>gpt-4o-mini</code></td>
-                <td className="py-3 px-4">General purpose, coding, analysis</td>
-                <td className="py-3 px-4">$$</td>
-              </tr>
-              <tr className="border-b">
-                <td className="py-3 px-4 font-semibold">Anthropic</td>
-                <td className="py-3 px-4"><code>claude-3-5-sonnet</code></td>
-                <td className="py-3 px-4">Long context, writing, analysis</td>
-                <td className="py-3 px-4">$$</td>
-              </tr>
-              <tr className="border-b">
-                <td className="py-3 px-4 font-semibold">Groq</td>
-                <td className="py-3 px-4"><code>llama-3.3-70b</code></td>
-                <td className="py-3 px-4">Fast inference, cost-effective</td>
-                <td className="py-3 px-4">$</td>
-              </tr>
-              <tr className="border-b">
-                <td className="py-3 px-4 font-semibold">Ollama</td>
-                <td className="py-3 px-4"><code>llama3.2</code>, <code>mistral</code></td>
-                <td className="py-3 px-4">Privacy, offline, no API costs</td>
-                <td className="py-3 px-4">Free</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </section>
-
-      <section id="troubleshooting">
-        <h2 className="text-3xl font-bold mb-4">Troubleshooting</h2>
-
-        <div className="space-y-4">
-          <details className="p-4 border rounded-lg">
-            <summary className="font-semibold cursor-pointer">
-              "API key is required" error
-            </summary>
-            <div className="mt-3 text-sm text-gray-600 dark:text-gray-300">
-              <p>Make sure you've entered a valid API key for the selected provider.</p>
-              <ul className="list-disc ml-6 mt-2 space-y-1">
-                <li>OpenAI: Get key from platform.openai.com</li>
-                <li>Anthropic: Get key from console.anthropic.com</li>
-                <li>Groq: Get key from console.groq.com</li>
-                <li>Ollama: No API key needed (runs locally)</li>
-              </ul>
+            <div className="p-5 border-l-4 border-red-500 bg-red-500/10 rounded-r-xl">
+              <h4 className="font-bold mb-2 text-red-400">❌ DON'T: Send Sensitive Data</h4>
+              <p className="text-sm text-gray-300">
+                Avoid sending passwords, API keys, or PII to external AI providers.
+                Use Ollama for local processing of sensitive data.
+              </p>
             </div>
-          </details>
+          </div>
+        </section>
 
-          <details className="p-4 border rounded-lg">
-            <summary className="font-semibold cursor-pointer">
-              Response is too short or incomplete
-            </summary>
-            <div className="mt-3 text-sm text-gray-600 dark:text-gray-300">
-              <p>Increase the <code>maxTokens</code> parameter. Default is 1000 tokens (~750 words).</p>
-              <p className="mt-2">For longer responses, try 2000-4000 tokens.</p>
-            </div>
-          </details>
-
-          <details className="p-4 border rounded-lg">
-            <summary className="font-semibold cursor-pointer">
-              "No response from AI API" error
-            </summary>
-            <div className="mt-3 text-sm text-gray-600 dark:text-gray-300">
-              <p>Check your internet connection and verify the API endpoint is accessible.</p>
-              <p className="mt-2">For Ollama, ensure the server is running on <code>http://localhost:11434</code></p>
-            </div>
-          </details>
-        </div>
-      </section>
-
-      <section id="related">
-        <h2 className="text-3xl font-bold mb-4">Related Nodes</h2>
-        <div className="grid md:grid-cols-2 gap-4">
-          <NodeCard
-            title="AI Text Generation"
-            description="Specialized content generation with predefined templates"
-            href="/docs/nodes/ai/text-generation"
-            icon="✍️"
-          />
-          <NodeCard
-            title="AI Image Analysis"
-            description="Analyze images with vision models"
-            href="/docs/nodes/ai/image-analysis"
-            icon="👁️"
-          />
-        </div>
-      </section>
+        {/* Related Nodes */}
+        <section id="related">
+          <h2 className="text-3xl font-black mb-6 text-white">Related Nodes</h2>
+          <div className="grid md:grid-cols-2 gap-6">
+            <NodeCard
+              title="AI Text Generation"
+              description="Specialized content generation with predefined templates"
+              href="/docs/nodes/ai/text-generation"
+              icon="✍️"
+            />
+            <NodeCard
+              title="AI Image Analysis"
+              description="Analyze images with vision models"
+              href="/docs/nodes/ai/image-analysis"
+              icon="👁️"
+            />
+          </div>
+        </section>
+      </div>
     </div>
   );
 }

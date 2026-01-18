@@ -1,64 +1,57 @@
 'use client';
 
-import { useEffect, useState } from 'react';
-import { BookOpen } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
+import { useState } from 'react';
 
+// Table of Contents Component
 export function TableOfContents() {
-  const [headings, setHeadings] = useState<{ id: string; text: string; level: number }[]>([]);
   const [activeId, setActiveId] = useState('');
 
-  useEffect(() => {
-    const elements = Array.from(document.querySelectorAll('article h2, article h3'));
-    const headingData = elements.map((element) => ({
-      id: element.id,
-      text: element.textContent || '',
-      level: parseInt(element.tagName.substring(1)),
-    }));
-    setHeadings(headingData);
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setActiveId(entry.target.id);
-          }
-        });
-      },
-      { rootMargin: '-100px 0px -80% 0px' }
-    );
-
-    elements.forEach((element) => observer.observe(element));
-
-    return () => observer.disconnect();
-  }, []);
-
-  if (headings.length === 0) return null;
+  // Mock headings for demo
+  const headings = [
+    { id: 'overview', text: 'Overview', level: 2 },
+    { id: 'configuration', text: 'Configuration', level: 2 },
+    { id: 'output', text: 'Output', level: 2 },
+    { id: 'examples', text: 'Examples', level: 2 },
+    { id: 'best-practices', text: 'Best Practices', level: 2 },
+  ];
 
   return (
-    <div>
-      <div className="flex items-center gap-2 text-sm font-semibold text-gray-900 dark:text-gray-100 mb-4">
-        <BookOpen className="h-4 w-4" />
+    <div className="sticky top-8">
+      <div className="flex items-center gap-2 text-sm font-bold text-white mb-4 px-3">
+        <div className="h-1 w-1 bg-purple-500 rounded-full" />
         On This Page
       </div>
-      <ul className="space-y-2 text-sm border-l-2 border-gray-200 dark:border-gray-700 pl-4">
+      <div className="space-y-1 border-l-2 border-purple-500/20 pl-4">
         {headings.map((heading) => (
-          <li
+          <a
             key={heading.id}
-            className={heading.level === 3 ? 'ml-4' : ''}
+            href={`#${heading.id}`}
+            className={`block py-2 px-3 text-sm rounded-lg transition-all ${
+              activeId === heading.id
+                ? 'text-purple-400 bg-purple-500/10 font-medium'
+                : 'text-gray-400 hover:text-white hover:bg-white/5'
+            } ${heading.level === 3 ? 'ml-4' : ''}`}
           >
-            <a
-              href={`#${heading.id}`}
-              className={`block py-1 transition-colors ${
-                activeId === heading.id
-                  ? 'text-blue-600 dark:text-blue-400 font-medium'
-                  : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100'
-              }`}
-            >
-              {heading.text}
-            </a>
-          </li>
+            {heading.text}
+          </a>
         ))}
-      </ul>
+      </div>
+
+      {/* Community Help Card */}
+      <div className="mt-8 p-4 rounded-xl bg-gradient-to-br from-purple-500/10 to-blue-500/10 border border-purple-500/20">
+        <h4 className="font-bold text-white mb-2 text-sm">Need Help?</h4>
+        <p className="text-xs text-gray-400 mb-3">
+          Join our community for support and discussions.
+        </p>
+        <a
+          href="https://discord.com"
+          className="inline-flex items-center gap-2 text-xs text-purple-400 hover:text-purple-300 transition-colors"
+        >
+          Join Discord
+          <ArrowRight className="h-3 w-3" />
+        </a>
+      </div>
     </div>
   );
 }

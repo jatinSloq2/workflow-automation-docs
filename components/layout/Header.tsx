@@ -10,7 +10,7 @@ export function Header() {
   const [productsOpen, setProductsOpen] = useState(false);
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-black/80 backdrop-blur-xl border-b border-white/10">
+    <header className="fixed top-0 left-0 right-0 z-50 bg-black/80 dark:bg-black/80 light:bg-white/80 backdrop-blur-xl border-b border-white/10 dark:border-white/10 light:border-gray-200 transition-colors duration-200">
       {/* Top Banner */}
       <div className="bg-gradient-to-r from-purple-600 to-blue-600 text-white text-center py-2 px-4 text-sm">
         <div className="flex items-center justify-center gap-2">

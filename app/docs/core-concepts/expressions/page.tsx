@@ -20,7 +20,7 @@ export default function ExpressionsPage() {
           
           <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl leading-relaxed">
             Expressions allow you to dynamically reference and manipulate data throughout your workflows. 
-            Use double curly braces {{'{}'}} to access data from nodes, inputs, and built-in functions.
+            Use double curly braces to access data from nodes, inputs, and built-in functions.
           </p>
         </div>
 
@@ -33,7 +33,7 @@ export default function ExpressionsPage() {
               and other sources using a simple syntax.
             </p>
             <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
-              All expressions are wrapped in double curly braces: <code className="bg-gray-200 dark:bg-white/10 px-2 py-1 rounded text-sm">{"{{expression}}"}</code>
+              All expressions are wrapped in double curly braces: {'{{ expression }}'} syntax
             </p>
           </div>
         </section>
@@ -48,7 +48,7 @@ export default function ExpressionsPage() {
                 Access output data from any node in your workflow.
               </p>
               <code className="block bg-gray-200 dark:bg-black/50 p-3 rounded text-sm text-gray-800 dark:text-gray-200 font-mono overflow-x-auto">
-                {`${'node.httpRequest_1.data.results[0].name'}`}
+                $node.httpRequest_1.data.results[0].name
               </code>
             </div>
 
@@ -58,7 +58,7 @@ export default function ExpressionsPage() {
                 Reference data from the immediately previous node.
               </p>
               <code className="block bg-gray-200 dark:bg-black/50 p-3 rounded text-sm text-gray-800 dark:text-gray-200 font-mono overflow-x-auto">
-                {`${'prev.data.email'}`}
+                $prev.data.email
               </code>
             </div>
 
@@ -68,7 +68,7 @@ export default function ExpressionsPage() {
                 Access workflow trigger input data.
               </p>
               <code className="block bg-gray-200 dark:bg-black/50 p-3 rounded text-sm text-gray-800 dark:text-gray-200 font-mono overflow-x-auto">
-                {`${'input.userId'}`}
+                $input.userId
               </code>
             </div>
 
@@ -78,9 +78,9 @@ export default function ExpressionsPage() {
                 Use special functions for common operations.
               </p>
               <ul className="space-y-1 text-sm text-gray-700 dark:text-gray-300">
-                <li>• <code className="bg-gray-200 dark:bg-black/50 px-2 py-1 rounded">{'$now'}</code> - Current timestamp</li>
-                <li>• <code className="bg-gray-200 dark:bg-black/50 px-2 py-1 rounded">{'$timestamp'}</code> - Unix timestamp</li>
-                <li>• <code className="bg-gray-200 dark:bg-black/50 px-2 py-1 rounded">{'$uuid'}</code> - Generate unique ID</li>
+                <li>• $now - Current timestamp</li>
+                <li>• $timestamp - Unix timestamp</li>
+                <li>• $uuid - Generate unique ID</li>
               </ul>
             </div>
           </div>
@@ -92,9 +92,8 @@ export default function ExpressionsPage() {
             <div className="p-6 rounded-xl bg-gray-100 dark:bg-white/5 border border-gray-200 dark:border-white/10">
               <h4 className="font-bold mb-3 text-gray-900 dark:text-white">Personalized Emails</h4>
               <code className="block bg-gray-200 dark:bg-black/50 p-3 rounded text-sm text-gray-800 dark:text-gray-200 font-mono overflow-x-auto">
-Dear {`{{$node.getData_1.data.name}}`},
-Your order {`{{$prev.data.orderId}}`}
-is ready!
+Dear customer name,
+Your order is ready!
               </code>
             </div>
 
@@ -103,7 +102,6 @@ is ready!
               <code className="block bg-gray-200 dark:bg-black/50 p-3 rounded text-sm text-gray-800 dark:text-gray-200 font-mono overflow-x-auto">
 IF (price {'>'} 100)
   Apply discount
-{`{{$node.httpRequest_1.data.price}}`}
               </code>
             </div>
           </div>

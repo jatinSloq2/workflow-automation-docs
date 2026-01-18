@@ -44,17 +44,17 @@ export function Header() {
             <div className="relative">
               <button
                 onMouseEnter={() => setProductsOpen(true)}
-                className="flex items-center gap-1 px-4 py-2 text-gray-300 hover:text-white transition-colors rounded-lg hover:bg-white/5"
+                className="flex items-center gap-1 px-4 py-2 text-gray-300 dark:text-gray-300 light:text-gray-700 hover:text-white dark:hover:text-white light:hover:text-gray-900 transition-colors rounded-lg hover:bg-white/5 dark:hover:bg-white/5 light:hover:bg-gray-100"
               >
                 Product
                 <ChevronDown className="h-4 w-4" />
               </button>
-              
+
               {productsOpen && (
                 <div
                   onMouseEnter={() => setProductsOpen(true)}
                   onMouseLeave={() => setProductsOpen(false)}
-                  className="absolute top-full left-0 mt-2 w-64 bg-gray-900 border border-white/10 rounded-xl shadow-2xl overflow-hidden"
+                  className="absolute top-full left-0 mt-2 w-64 bg-gray-900 dark:bg-gray-900 light:bg-white border border-white/10 dark:border-white/10 light:border-gray-200 rounded-xl shadow-2xl overflow-hidden"
                 >
                   <div className="p-2">
                     <Link href="/features" className="flex items-start gap-3 p-3 rounded-lg hover:bg-white/5 transition-colors group">
